@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvText1"
+        android:layout_width="30dip"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvText2"
+        android:layout_width="50dip"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvText3"
+        android:layout_width="120dip"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <TextView
+        android:id="@+id/tvText4"
+        android:layout_width="120dip"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+	    
+</LinearLayout>

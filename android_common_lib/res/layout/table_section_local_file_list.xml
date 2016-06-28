@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:layout_width="fill_parent" 
+	android:layout_height="wrap_content" 
+	android:background="@drawable/list_section_bg">
+	
+    <TextView android:id="@+id/sectionText" 
+    	android:layout_height="wrap_content" 
+    	android:layout_width="fill_parent"
+    	android:textColor="#FF000000"
+    	android:padding="2dip"
+    	android:layout_centerInParent="true">
+    </TextView>
+    
+</RelativeLayout>

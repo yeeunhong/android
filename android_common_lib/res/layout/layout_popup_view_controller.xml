@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="240dip"
+    android:background="@drawable/popup_bg_u"
+    android:baselineAligned="false"
+    android:padding="10dip"
+    android:orientation="vertical"
+     >
+
+    <!-- Title 및 close button -->
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        
+        <Button
+            android:id="@+id/btnPopupClose"
+            android:layout_width="30dip"
+            android:layout_height="20dip"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/popup_btn_close"
+            />
+        
+        <TextView
+            android:id="@+id/txtPopupTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@id/txtPopupTitle"
+            android:ellipsize="end" 
+            android:textColor="#FF000000" 
+            android:gravity="center_vertical" 
+            android:layout_marginLeft="5dip"/>
+
+        
+        
+    </RelativeLayout>
+        
+    <!-- message -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="12" >
+        
+        <TextView
+            android:id="@+id/txtPopupMessage"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="5dip"
+            android:gravity="center"
+            android:textColor="#FF0F0F0F"
+            android:background="#F0F0F0FF" />
+
+    </LinearLayout>
+    
+    <!-- buttons -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnPopup00"
+            android:background="@drawable/popup_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_margin="5dip" />
+
+        <Button
+            android:id="@+id/btnPopup01"
+            android:background="@drawable/popup_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_margin="5dip" />
+        
+        <Button
+            android:id="@+id/btnPopup02"
+            android:background="@drawable/popup_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_margin="5dip" />
+
+    </LinearLayout>
+
+</LinearLayout>

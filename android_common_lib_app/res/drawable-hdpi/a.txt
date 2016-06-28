@@ -1,0 +1,24 @@
+ D 드라이브의 볼륨: 회사업무디스크
+ 볼륨 일련 번호: 2ED9-5D97
+
+ D:\workspace\android_common_lib_app\res\drawable-hdpi 디렉터리
+
+2012-01-03  오후 02:52               893 emo_im_angel.png
+2012-01-03  오후 02:52               916 emo_im_cool.png
+2012-01-03  오후 02:52               873 emo_im_crying.png
+2012-01-03  오후 02:52               913 emo_im_embarrassed.png
+2012-01-03  오후 02:52               911 emo_im_foot_in_mouth.png
+2012-01-03  오후 02:52               862 emo_im_happy.png
+2012-01-03  오후 02:52               926 emo_im_kissing.png
+2012-01-03  오후 02:52               893 emo_im_laughing.png
+2012-01-03  오후 02:52               952 emo_im_lips_are_sealed.png
+2012-01-03  오후 02:52               985 emo_im_money_mouth.png
+2012-01-03  오후 02:52               856 emo_im_sad.png
+2012-01-03  오후 02:52               916 emo_im_surprised.png
+2012-01-03  오후 02:52               941 emo_im_tongue_sticking_out.png
+2012-01-03  오후 02:52               884 emo_im_undecided.png
+2012-01-03  오후 02:52               895 emo_im_winking.png
+2012-01-03  오후 02:52               893 emo_im_wtf.png
+2012-01-03  오후 02:52               927 emo_im_yelling.png
+              17개 파일              15,436 바이트
+               0개 디렉터리  64,934,371,328 바이트 남음

@@ -1,0 +1,1 @@
+javah -jni -classpath ../bin -d include kr.co.uniquantum.search.SearchModule

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="app.inka.android"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-feature android:name="android.hardware.usb.host" />
+    <uses-sdk android:minSdkVersion="8"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+  	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+  	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.WRITE_SETTINGS" />
+  	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+  	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  	<uses-permission android:name="android.permission.WAKE_LOCK" /> 
+  	<uses-permission android:name="android.permission.READ_PHONE_STATE"/> 
+  	<uses-permission android:name="android.permission.READ_LOGS" />
+	
+    <application
+        android:icon="@drawable/ic_launcher" 
+        android:label="@string/app_name" >
+        <activity android:name=".mainActivity" android:label="@string/app_name" android:configChanges="orientation|screenLayout" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>            
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"/>
+            </intent-filter>
+            <meta-data 
+                android:name="android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
+                android:resource="@xml/accessory_filter"/>
+            <intent-filter >
+                <action android:name="android.hardware.usb.action.USB_ACCESSORY_DETACHED"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.hardware.usb.action.USB_ACCESSORY_DETACHED"
+                android:resource="@xml/accessory_filter"/>
+        </activity>
+        <activity android:name=".TabTestActivity" />
+        <activity android:name=".TabTestSubActivity" />        
+        <activity android:name=".customNotificationView" />
+        <activity android:name="code.inka.android.ui.popup.popupActivity" android:theme="@android:style/Theme.Dialog" />
+        <activity android:name="code.inka.android.ui.activity.SimpleImageViewActivity" />
+		
+		<activity android:name=".ListTestActivity" />
+		<activity android:name=".SectionListTestActivity" />
+
+		<activity android:name=".CameraPreviewActivity" />
+		<activity android:name=".InterruptWatchDog" />
+		
+    </application>
+</manifest>

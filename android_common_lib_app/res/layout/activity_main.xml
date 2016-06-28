@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/btnBtDiscoverable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth Discoverable" />
+
+    <Button
+        android:id="@+id/btnBtDiscovering"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth Discovering" />
+    
+    <Button
+        android:id="@+id/btnBtStartServer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth StartServer" />
+    
+    <Button
+        android:id="@+id/btnBtStopServer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth StopServer" />
+    
+    <Button
+        android:id="@+id/btnBtConnectionServer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth Connection SHW-M380W" />
+    
+    <Button
+        android:id="@+id/btnBtConnectionServer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bluetooth Connection Galaxy Nexus" />
+    
+    <Button
+        android:id="@+id/btnDialogTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dialog Test" />
+
+</LinearLayout>

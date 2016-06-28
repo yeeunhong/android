@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, Android_common_lib_appActivity!</string>
+    <string name="app_name">Android_common_lib_app</string>
+    <string name="strBtnTestPopupAct">test popup activity</string>
+    <string name="strBtnTestTabAct">test tab activity</string>
+    <string name="strBtnTestListAct">test list activity</string>
+    <string name="strBtnPopupOK">popup OK</string>
+    <string name="strBtnPopupOkCancel">popup OkCancel</string>
+    <string name="strBtnPopupCustom">popup custom</string>
+    <string name="strBtnTestDebugMode">Test Debug Mode</string>
+
+</resources>

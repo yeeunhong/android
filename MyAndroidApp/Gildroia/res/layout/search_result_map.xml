@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SearchResultMapLayout"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <com.google.android.maps.MapView
+    	android:id="@+id/SearchResultMap"
+    	android:layout_width="fill_parent"
+    	android:layout_height="fill_parent"
+    	android:enabled="true"
+    	android:clickable="true"
+    	android:apiKey="0vi6ybSD8ygkHtCccTCuD9U2eZytjQuB2y8DjYw"
+    	/>
+</FrameLayout>

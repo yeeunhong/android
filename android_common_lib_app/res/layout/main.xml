@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello" />
+    
+    <Button
+        android:id="@+id/btnTestTabAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/strBtnTestTabAct" />
+
+    <Button
+        android:id="@+id/btnTestDebugMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/strBtnTestDebugMode" />
+    
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnTestPopupOK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strBtnPopupOK" />
+
+        <Button
+            android:id="@+id/btnTestPopupOKnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strBtnPopupOkCancel" />
+
+        <Button
+            android:id="@+id/btnTestPopupCustom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strBtnPopupCustom" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnTestListAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strBtnTestListAct" />
+
+        <Button
+            android:id="@+id/btnTestCameraPreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="camera preview" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnFileSystemCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Read /sys/class" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnFindingHdmiLog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finding HDMI Logcat" />
+
+        <Button
+            android:id="@+id/btnServerLogcat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="run logcat server" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/btnInterruptWatchDog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="InterruptWatchDog" />
+
+        <Button
+            android:id="@+id/btnScreenCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ScreenCapture" />
+
+    </LinearLayout>
+</LinearLayout>
