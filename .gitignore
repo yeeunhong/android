@@ -1,7 +1,7 @@
 *.o
 *.d
 *.class
-*.svn-base
+**/.svn/
 **/bin/
 **/gen/
 **/obj/
