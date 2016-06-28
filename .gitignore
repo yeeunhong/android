@@ -1,5 +1,7 @@
 *.o
 *.d
+*.class
 /bin
+/bin/
 /gen
 /obj
