@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.qrcode.QrCreateFragment">
+
+    <EditText
+        android:id="@+id/edit_qrcodeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/qrcode_input_text"
+        android:autofillHints="@string/qrcode_input_text"
+        android:layout_margin="3dp" />
+    <Button
+        android:id="@+id/btn_createQrcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_qrcodeText"
+        android:text="@string/menu_qrcreate" />
+
+    <Button
+        android:id="@+id/btn_saveQrcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/menu_qrcore_save" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/btn_createQrcode"
+        android:layout_above="@id/btn_saveQrcode">
+
+        <ImageView
+            android:id="@+id/imageQrCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/img_ryan2"
+            tools:ignore="MissingConstraints" />
+
+    </RelativeLayout>
+</RelativeLayout>

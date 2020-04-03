@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.mqtt.MqttFragment">
+
+    <LinearLayout
+        android:id="@+id/mqtt_inputArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/edit_mqttText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:inputType="text"
+            android:layout_weight="300"
+            android:hint=""
+            android:autofillHints=""
+            android:layout_margin="3dp" />
+
+        <Button
+            android:id="@+id/btn_mqttSend"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_menu_send" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lst_mqttList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:listSelector="@android:color/transparent"
+        android:layout_above="@id/mqtt_inputArea"
+        />
+
+</RelativeLayout>
