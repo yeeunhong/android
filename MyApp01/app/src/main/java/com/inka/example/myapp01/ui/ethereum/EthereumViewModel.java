@@ -16,8 +16,8 @@ public class EthereumViewModel extends ViewModel {
 
     private ListViewAdapter adapter;
 
-    public EthereumViewModel( Activity context ) {
-        adapter = new ListViewAdapter(context);
+    public EthereumViewModel( Activity context, String ethAddr ) {
+        adapter = new ListViewAdapter(context, ethAddr );
     }
 
     public ListAdapter getListAdapter() {

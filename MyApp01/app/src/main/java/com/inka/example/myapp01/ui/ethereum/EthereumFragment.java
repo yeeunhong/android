@@ -20,7 +20,7 @@ public class EthereumFragment extends MyFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         if( viewModel == null ) {
-            viewModel = new EthereumViewModel(getActivity());
+            viewModel = new EthereumViewModel(getActivity(), "0xceBa559A8bBB37bEBf410Ab3959ACeB298084B8b");
         }
         View root = inflater.inflate(R.layout.fragment_ethereum, container, false);
 

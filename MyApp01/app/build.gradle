@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 29
@@ -38,5 +39,6 @@ dependencies {
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
     implementation 'androidx.preference:preference:1.1.0'
     implementation 'com.squareup.okhttp3:okhttp:3.6.0'          // HTTPS 통신
+
 
 }

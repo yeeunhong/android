@@ -1,43 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp" >
-
-    <ImageView
-        android:id="@+id/imageIcon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentLeft="true"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:src="@drawable/ic_menu_ethereum" />
-
-    <TextView
-        android:id="@+id/tokenName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/imageIcon"
-        android:layout_centerInParent="true"
-        android:text="TOKEN_NAME 123213123123fsdf"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:singleLine="true"
-        android:textColor="#000000" />
+    android:layout_height="60dp"
+    android:orientation="horizontal" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerInParent="true"
-        android:orientation="horizontal" >
+        android:layout_width="match_parent"
+        android:layout_gravity="center_vertical|left"
+        android:layout_weight="3">
+
+        <ImageView
+            android:id="@+id/imageIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_menu_ethereum" />
+
+        <TextView
+            android:id="@+id/tokenName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/imageIcon"
+            android:layout_centerInParent="true"
+            android:text="TOKEN_NAME 123213123123fsdf"
+            android:textSize="24dp"
+            android:singleLine="true"
+            android:textColor="#000000" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|right"
+        android:layout_weight="7" >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tokenQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="0.058321"
-            android:textSize="15dp"
+            android:singleLine="true"
+            android:autoSizeTextType="uniform"
+            android:autoSizeMaxTextSize="15dp"
             android:textColor="@color/design_default_color_secondary_variant" />
 
         <TextView
@@ -46,10 +62,11 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
             android:text="ETH"
             android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="#666666" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
