@@ -1,20 +1,22 @@
 package com.inka.example.myapp01.ui.ethereum;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.inka.example.myapp01.R;
 import com.inka.example.myapp01.ui.MyFragment;
 import com.inka.example.myapp01.ui.gallery.GalleryViewModel;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProviders;
 
-public class EthereumFragment extends MyFragment {
+public class EthereumFragment extends MyFragment implements SearchView.OnQueryTextListener {
 
+    private static final String LOG_TAG = "ETH_LIST";
     private EthereumViewModel viewModel = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -29,6 +31,24 @@ public class EthereumFragment extends MyFragment {
 
         viewModel.updateList();
         setVisibilityFloatingActionButton(View.INVISIBLE);
+
+        SearchView searchView = root.findViewById(R.id.eth_searchView) ;
+        if( searchView != null ) {
+            Log.d(LOG_TAG,"setOnQueryTextListener " );
+            searchView.setOnQueryTextListener( this );
+        }
         return root;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        Log.d(LOG_TAG,"onQueryTextChange : " + newText );
+        viewModel.filterText( newText );
+        return true;
     }
 }

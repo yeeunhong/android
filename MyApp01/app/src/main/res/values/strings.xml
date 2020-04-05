@@ -36,4 +36,6 @@
     <string name="chatting_server_addr">IP Address</string>
     <string name="chatting_server_port">Port</string>
     <string name="menu_ethereum">Ethereum</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search text</string>
 </resources>

@@ -31,4 +31,12 @@ public class EthereumViewModel extends ViewModel {
         adapter.update();
         adapter.notifyDataSetChanged();
     }
+
+    public void filterText(String newText) {
+        adapter.setFilterText( newText );
+    }
+
+    public void reflash() {
+        adapter.notifyDataSetChanged();
+    }
 }
