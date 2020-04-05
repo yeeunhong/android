@@ -6,6 +6,8 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.media.session.MediaSession;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -187,7 +189,7 @@ public class ListViewAdapter extends BaseAdapter {
         } else {
             item.item.quantity = new BigInteger(item.item.quantity).subtract(quantity).toString();
         }
-
+        lastBlockNumber = Math.max( lastBlockNumber, blockNumber );
         viewItemMap.put(contract, item);
     }
 
@@ -274,7 +276,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         String requestUrl = requestURLFormat
                 .replace("<%address%>", ethAddress )
-                .replace("<%startblock%>", String.valueOf( lastBlockNumber ) )
+                .replace("<%startblock%>", String.valueOf( lastBlockNumber + 1 ) )
                 .replace( "<%apikey%>", apiKey );
         Log.d( LOG_TAG, "requestUrl : " + requestUrl );
 
@@ -292,7 +294,7 @@ public class ListViewAdapter extends BaseAdapter {
         }
 
     }
-    final String requestURLFormat = "https://api.etherscan.io/api?module=account&action=tokentx&address=<%address%>&startblock=<%startblock%>&endblock=999999999&sort=asc&apikey=<%apikey%>&page=1&offset=100";
+    final String requestURLFormat = "https://api.etherscan.io/api?module=account&action=tokentx&address=<%address%>&startblock=<%startblock%>&endblock=999999999&sort=asc&apikey=<%apikey%>&page=1";
 
     Callback requestCallback = new Callback() {
         private static final String LOG_TAG = "REQUEST_CALLBACK";
@@ -315,6 +317,13 @@ public class ListViewAdapter extends BaseAdapter {
                             addItem(jsonArray.getJSONObject(i));
                         } catch( JSONException e ) { e.printStackTrace();}
                     }
+                    // 남은 항목들이 있을 수 있어서 3초 후에 다음 데이터를 요청한다.
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable(){ // Non UI Thread 에서 handler의 postDelayed 함수를 호출하기 위한 방법
+                        @Override
+                        public void run() {
+                            update();
+                        }
+                    }, 3000 );
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
