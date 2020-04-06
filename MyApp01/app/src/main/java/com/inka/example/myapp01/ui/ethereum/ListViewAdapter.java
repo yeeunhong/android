@@ -63,7 +63,7 @@ public class ListViewAdapter extends BaseAdapter {
     ExecutorService executorService = Executors.newFixedThreadPool(4);
 
     private Map<Integer, Drawable> drawableIconMap = new HashMap<Integer,Drawable>();
-    private final RealmConfiguration realmConfig;
+    public static RealmConfiguration realmConfig;
 
     private final String apiKey = "PS1SWX5K3K6AVA46I62VHPR4ACERKZTISZ";
 
@@ -129,69 +129,7 @@ public class ListViewAdapter extends BaseAdapter {
         return position;
     }
 
-    /**
-     *
-     * @param jsonItem
-     * @throws JSONException
-     */
-    private void addItem(JSONObject jsonItem) throws JSONException {
-        String totkeName    = jsonItem.getString("tokenName");
-        String tokenSymbol  = jsonItem.getString("tokenSymbol");
-        String contract     = jsonItem.getString("contractAddress");
-        //String fromAddr     = jsonItem.getString("from").toUpperCase();       // 출금 주소
-        String toAddr       = jsonItem.getString("to").toLowerCase();   // 입금 주소
-        String blockNumber  = jsonItem.getString("blockNumber");
 
-        String strQuantity  = jsonItem.getString("value");
-        BigInteger quantity = new BigInteger( strQuantity );
-
-        addItem( R.drawable.ic_menu_ethereum, totkeName,  tokenSymbol, contract, Long.valueOf(blockNumber), quantity, ethAddress.compareTo(toAddr) == 0 );
-    }
-
-    /**
-     * 리스트에 항목을 추가한다.
-     *
-     * @param realmWrite
-     * @param resDrawableIconID
-     * @param tokenName
-     * @param symbol
-     * @param quantity
-     * @return true:성공, false:실패
-     */
-    public void addItem( int resDrawableIconID, String tokenName, String symbol, String contract, long blockNumber, BigInteger quantity, boolean bAdd) {
-        Drawable icon = null;
-        if( !drawableIconMap.isEmpty()) {
-            icon = drawableIconMap.get(resDrawableIconID);
-        }
-        if( icon == null ) {
-            icon = context.getResources().getDrawable(resDrawableIconID);
-            drawableIconMap.put( resDrawableIconID, icon );
-        }
-        addItem( icon, tokenName, symbol, contract, blockNumber, quantity, bAdd );
-    }
-
-    public void addItem( Drawable icon, String tokenName, String symbol, String contract, long blockNumber, BigInteger quantity, boolean bAdd) {
-        // Log.d( LOG_TAG, String.format( "addItem %s icon is %s", tokenName, icon == null ? "null" : "not null" ));
-
-        ListViewItem item = viewItemMap.get(contract);
-        if (item == null) {
-            item = new ListViewItem( new TokenItemData() );
-        }
-
-        item.item.quantity = "0";
-        item.iconDrawable = icon;
-        item.item.tokenName = tokenName;
-        item.item.symbol = symbol;
-        item.item.contract = contract;
-        item.item.blockNumber = blockNumber;
-        if (bAdd) {
-            item.item.quantity = new BigInteger(item.item.quantity).add(quantity).toString();
-        } else {
-            item.item.quantity = new BigInteger(item.item.quantity).subtract(quantity).toString();
-        }
-        lastBlockNumber = Math.max( lastBlockNumber, blockNumber );
-        viewItemMap.put(contract, item);
-    }
 
     public void setFilterText(String filterText) {
         filterText = filterText.toLowerCase(Locale.getDefault());
@@ -255,13 +193,13 @@ public class ListViewAdapter extends BaseAdapter {
         viewHolder.tvSymbol.setText(item.item.symbol);
         viewHolder.tvQuantity.setText( new BigInteger( item.item.quantity ).divide( BigInteger.valueOf( 1000000000000000000l )).toString() );
 
-        File imgFile = new File( context.getCacheDir(), item.item.contract + ".png" );
+        File imgFile = new File( context.getCacheDir(), item.item.iconFilename + ".png" );
         Glide.with(context).load(imgFile).placeholder(R.drawable.ic_menu_ethereum).centerCrop().into(viewHolder.ivIcon);
 
         if( !imgFile.exists()) {
             if( imgFile.length() < 10 ) imgFile.delete();
 
-            executorService.execute(item);
+            executorService.execute(item);      // 토큰에 해당하는 icon 을 web 에서 다운로드 받는다. background 에서
         }
 
         return convertView;
@@ -269,26 +207,25 @@ public class ListViewAdapter extends BaseAdapter {
     DecimalFormat quantityFormat = new DecimalFormat("####.##########");
 
     /**
-     *
+     * etherscan.io 에서 eth 주소에 해당하는 코인들의 전송 이력을 받아와서 정보를 갱신 시켜 준다.
      */
     public void update() {
         Log.d( LOG_TAG, "update" );
 
         String requestUrl = requestURLFormat
-                .replace("<%address%>", ethAddress )
-                .replace("<%startblock%>", String.valueOf( lastBlockNumber + 1 ) )
-                .replace( "<%apikey%>", apiKey );
+                .replace("<%address%>", ethAddress )                                    // 요청할 이더리움 주소
+                .replace("<%startblock%>", String.valueOf( lastBlockNumber + 1 ) )      // 마지막으로 요청한 블럭 번호 이후 부터 요청
+                .replace( "<%apikey%>", apiKey );                                       // etherscan.io API KEY
         Log.d( LOG_TAG, "requestUrl : " + requestUrl );
 
         try {
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = new OkHttpClient();                                           // OkHttpClient lib 이용
             Request request = new Request.Builder()
-                    //.addHeader("x-api-key", RestTestCommon.API_KEY)
                     .url( requestUrl )
                     .build();
 
             //비동기 처리 (enqueue 사용)
-            client.newCall(request).enqueue( requestCallback );
+            client.newCall(request).enqueue( requestCallback );                                 // 비동기 request
         } catch (Exception e){
             System.err.println(e.toString());
         }
@@ -320,7 +257,7 @@ public class ListViewAdapter extends BaseAdapter {
                     // 남은 항목들이 있을 수 있어서 3초 후에 다음 데이터를 요청한다.
                     new Handler(Looper.getMainLooper()).postDelayed(new Runnable(){ // Non UI Thread 에서 handler의 postDelayed 함수를 호출하기 위한 방법
                         @Override
-                        public void run() {
+                        public void run() {             // Handler 는 Main Thread 가 아니면 post 를 요청할 수 없다. Main looper 에 연결하여 준다.
                             update();
                         }
                     }, 3000 );
@@ -342,9 +279,71 @@ public class ListViewAdapter extends BaseAdapter {
             executorService.execute( RealmDataUpdate );
             // Log.d( LOG_TAG,"Response Body is " + response.body().string());
         }
-
-
     };
+
+    /**
+     *
+     * @param jsonItem
+     * @throws JSONException
+     */
+    private void addItem(JSONObject jsonItem) throws JSONException {
+        String totkeName    = jsonItem.getString("tokenName");
+        String tokenSymbol  = jsonItem.getString("tokenSymbol");
+        String contract     = jsonItem.getString("contractAddress");
+        //String fromAddr     = jsonItem.getString("from").toUpperCase();       // 출금 주소
+        String toAddr       = jsonItem.getString("to").toLowerCase();   // 입금 주소
+        String blockNumber  = jsonItem.getString("blockNumber");
+
+        String strQuantity  = jsonItem.getString("value");
+        BigInteger quantity = new BigInteger( strQuantity );
+
+        addItem( R.drawable.ic_menu_ethereum, totkeName,  tokenSymbol, contract, Long.valueOf(blockNumber), quantity, ethAddress.compareTo(toAddr) == 0 );
+    }
+
+    /**
+     * 리스트에 항목을 추가한다.
+     *
+     * @param realmWrite
+     * @param resDrawableIconID
+     * @param tokenName
+     * @param symbol
+     * @param quantity
+     * @return true:성공, false:실패
+     */
+    public void addItem( int resDrawableIconID, String tokenName, String symbol, String contract, long blockNumber, BigInteger quantity, boolean bAdd) {
+        Drawable icon = null;
+        if( !drawableIconMap.isEmpty()) {
+            icon = drawableIconMap.get(resDrawableIconID);
+        }
+        if( icon == null ) {
+            icon = context.getResources().getDrawable(resDrawableIconID);
+            drawableIconMap.put( resDrawableIconID, icon );
+        }
+        addItem( icon, tokenName, symbol, contract, blockNumber, quantity, bAdd );
+    }
+
+    public void addItem( Drawable icon, String tokenName, String symbol, String contract, long blockNumber, BigInteger quantity, boolean bAdd) {
+        // Log.d( LOG_TAG, String.format( "addItem %s icon is %s", tokenName, icon == null ? "null" : "not null" ));
+
+        ListViewItem item = viewItemMap.get(contract);
+        if (item == null) {
+            item = new ListViewItem( new TokenItemData() );
+        }
+
+        item.item.quantity = "0";
+        item.iconDrawable = icon;
+        item.item.tokenName = tokenName;
+        item.item.symbol = symbol;
+        item.item.contract = contract;
+        item.item.blockNumber = blockNumber;
+        if (bAdd) {
+            item.item.quantity = new BigInteger(item.item.quantity).add(quantity).toString();
+        } else {
+            item.item.quantity = new BigInteger(item.item.quantity).subtract(quantity).toString();
+        }
+        lastBlockNumber = Math.max( lastBlockNumber, blockNumber );
+        viewItemMap.put(contract, item);
+    }
 
     Runnable RealmDataUpdate = new Runnable(){
 

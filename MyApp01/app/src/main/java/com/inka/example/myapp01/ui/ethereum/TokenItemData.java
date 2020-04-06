@@ -13,6 +13,9 @@ public class TokenItemData extends RealmObject implements Comparable<TokenItemDa
     public String symbol;           // 코인 심볼명
     public String quantity;     // 개수 ( * 1000000000000000000 ) 0이 18개
     public long blockNumber;        // 블럭 넘버
+    public String iconFilename = "none";     // 토큰 아이콘의 파일명
+
+
 
     public TokenItemData(){}
     public TokenItemData(String tokenName) {
@@ -23,6 +26,14 @@ public class TokenItemData extends RealmObject implements Comparable<TokenItemDa
         this.tokenName = tokenName;
         this.symbol = symbol;
         this.contract = contract;
+    }
+
+    public String getIconFilename() {
+        return iconFilename;
+    }
+
+    public void setIconFilename(String iconFilename) {
+        this.iconFilename = iconFilename;
     }
 
     public long getBlockNumber() {
@@ -76,5 +87,6 @@ public class TokenItemData extends RealmObject implements Comparable<TokenItemDa
         this.tokenName      = itemData.tokenName;
         this.symbol         = itemData.symbol;
         this.blockNumber    = itemData.blockNumber;
+        this.iconFilename   = itemData.iconFilename;
     }
 }
