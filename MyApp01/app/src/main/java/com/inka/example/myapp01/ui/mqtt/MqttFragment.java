@@ -37,7 +37,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.preference.PreferenceManager;
 
-public class MqttFragment extends MyFragment implements IMqttActionListener, IMqttMessageListener, View.OnClickListener {
+public class MqttFragment extends Fragment implements IMqttActionListener, IMqttMessageListener, View.OnClickListener {
 
     private static final String LOG_TAG = "MQTT";
     private static MqttAndroidClient mqttAndroidClient;
@@ -83,7 +83,7 @@ public class MqttFragment extends MyFragment implements IMqttActionListener, IMq
                 btn.setOnClickListener( this );
             }
         }
-        setVisibilityFloatingActionButton(View.INVISIBLE);
+
         return root;
     }
 

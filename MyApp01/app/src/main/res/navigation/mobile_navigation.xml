@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.inka.example.myapp01.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
+        android:name="com.inka.example.myapp01.ui.freeboard.FreeBoardFragment"
+        android:label="@string/menu_freeboard"
+        tools:layout="@layout/fragment_freeboard">
 
         <action
             android:id="@+id/action_HomeFragment_to_HomeSecondFragment"
@@ -17,13 +17,10 @@
     </fragment>
     <fragment
         android:id="@+id/nav_home_second"
-        android:name="com.inka.example.myapp01.ui.home.HomeSecondFragment"
-        android:label="@string/home_second"
-        tools:layout="@layout/fragment_home_second">
+        android:label="@string/home_second">
         <action
             android:id="@+id/action_HomeSecondFragment_to_HomeFragment"
             app:destination="@id/nav_home" />
-
         <argument
             android:name="myArg"
             app:argType="string" />

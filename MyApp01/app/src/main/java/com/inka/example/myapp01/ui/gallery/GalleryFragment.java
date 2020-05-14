@@ -13,9 +13,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.inka.example.myapp01.R;
-import com.inka.example.myapp01.ui.MyFragment;
 
-public class GalleryFragment extends MyFragment {
+public class GalleryFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
 
@@ -33,7 +32,7 @@ public class GalleryFragment extends MyFragment {
             }
         });
          */
-        setVisibilityFloatingActionButton(View.INVISIBLE);
+
         return root;
     }
 }

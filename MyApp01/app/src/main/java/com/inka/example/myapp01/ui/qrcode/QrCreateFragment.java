@@ -1,12 +1,10 @@
 package com.inka.example.myapp01.ui.qrcode;
 
-import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,18 +14,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+import com.inka.example.myapp01.MainActivity;
 import com.inka.example.myapp01.R;
 import com.inka.example.myapp01.ui.MyFragment;
-import com.inka.example.myapp01.ui.home.HomeViewModel;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -35,10 +32,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
-public class QrCreateFragment extends MyFragment implements View.OnClickListener {
-
+public class QrCreateFragment extends Fragment implements View.OnClickListener {
+    Context context         = null;
     ImageView imageQrCode   = null;
     EditText  qrcodeEdit    = null;
     Bitmap    qrcodeBitmap  = null;
@@ -46,7 +42,7 @@ public class QrCreateFragment extends MyFragment implements View.OnClickListener
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
+        context = this.getContext();
         View root = inflater.inflate(R.layout.fragment_qrcreate, container, false);
 
         imageQrCode = ( ImageView ) root.findViewById( R.id.imageQrCode);
@@ -60,7 +56,25 @@ public class QrCreateFragment extends MyFragment implements View.OnClickListener
                 btnCreateQrcode = btn;
             }
         }
-        setVisibilityFloatingActionButton(View.INVISIBLE);
+
+        FloatingActionButton fab = root.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                IntentIntegrator intentIntegrator = new IntentIntegrator(QrCreateFragment.this.getActivity());
+                intentIntegrator.setCaptureActivity(CaptureForm.class);
+                intentIntegrator.setBeepEnabled(false); //바코드 인식시 소리
+                intentIntegrator.setOrientationLocked(false);
+                intentIntegrator.setPrompt( QrCreateFragment.this.getResources().getString( R.string.qrcode_prompt_text));
+                intentIntegrator.initiateScan();
+                /*
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                 */
+            }
+        });
+
         return root;
     }
 
@@ -105,5 +119,15 @@ public class QrCreateFragment extends MyFragment implements View.OnClickListener
         }
     }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult( requestCode, resultCode, data );
+        if( result != null ) {
+            if( result.getContents() == null ) {
+                Toast.makeText( context, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText( context, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }

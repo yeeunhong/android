@@ -16,6 +16,10 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.security.ProviderInstaller;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -28,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -56,23 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                IntentIntegrator intentIntegrator = new IntentIntegrator(MainActivity.this);
-                intentIntegrator.setCaptureActivity(CaptureForm.class);
-                intentIntegrator.setBeepEnabled(false); //바코드 인식시 소리
-                intentIntegrator.setOrientationLocked(false);
-                intentIntegrator.setPrompt( MainActivity.this.getResources().getString( R.string.qrcode_prompt_text));
-                intentIntegrator.initiateScan();
-                /*
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
-                 */
-            }
-        });
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -88,10 +77,20 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
 
         try {
+            ProviderInstaller.installIfNeeded(getApplicationContext());
+        } catch (GooglePlayServicesRepairableException e) {
+            GooglePlayServicesUtil.showErrorNotification(e.getConnectionStatusCode(), this.getApplicationContext());
+            return;
+        } catch (GooglePlayServicesNotAvailableException e) {
+            e.printStackTrace();
+        }
+
+        try {
             Thread.sleep(3000 - ( System.currentTimeMillis() - sTime ));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
     long backKeyPressedTime; //앱종료 위한 백버튼 누른시간
@@ -138,21 +137,25 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult( requestCode, resultCode, data );
         if( result != null ) {
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.nav_qrcreate);
+            if( f != null ) {
+                f.onActivityResult( requestCode, resultCode, data );
+            }
+            /*
             if( result.getContents() == null ) {
                 Toast.makeText( this, "Cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText( this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
             }
+             */
         } else {
             super.onActivityResult( requestCode, resultCode, data );
         }
     }
-
 
 
     public void checkPermission(){

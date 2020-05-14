@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.inka.example.myapp01.R;
 import com.inka.example.myapp01.ui.MyFragment;
 
-public class SlideshowFragment extends MyFragment {
+public class SlideshowFragment extends Fragment {
 
     private SlideshowViewModel slideshowViewModel;
 
@@ -31,7 +31,7 @@ public class SlideshowFragment extends MyFragment {
                 textView.setText(s);
             }
         });
-        setVisibilityFloatingActionButton(View.INVISIBLE);
+
         return root;
     }
 }
